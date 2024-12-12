@@ -21,8 +21,7 @@ def post_predict():
         newbalance = dat['nbalance']
         withdraw = dat['withdraw']
         ans = predict(payment_type, oldbalance, newbalance, withdraw)
-        return jsonify({'isFraud': ans})
-    return render_template('land.html')
+    return jsonify({'isFraud': ans})
 
 @app.route('/api/predict', methods=['POST'])
 def post_api_predict():
