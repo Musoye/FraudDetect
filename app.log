@@ -1,12 +1,7 @@
-2024-12-15 10:51:14,106 -INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2024-12-15 12:15:57,298 -INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
-2024-12-15 10:51:14,107 -INFO - [33mPress CTRL+C to quit[0m
-2024-12-15 10:51:28,666 -INFO - 127.0.0.1 - - [15/Dec/2024 10:51:28] "GET /predict HTTP/1.1" 200 -
-2024-12-15 10:51:46,069 -INFO - 102896975 C1231006815 M1979787155 24 2024-12-05 PAYMENT 20000 10000 10000 0
-2024-12-15 10:51:46,069 -INFO - 127.0.0.1 - - [15/Dec/2024 10:51:46] "POST /predict HTTP/1.1" 200 -
-2024-12-15 11:03:32,328 -INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5000
-2024-12-15 11:03:32,328 -INFO - [33mPress CTRL+C to quit[0m
-2024-12-15 11:03:40,393 -INFO - 127.0.0.1 - - [15/Dec/2024 11:03:40] "GET /predict HTTP/1.1" 200 -
-2024-12-15 11:03:57,427 -INFO - Parameters: 102896975 C1231006815 M1979787155 24 2024-12-17 PAYMENT 20000 10000 10000            Result: 0
-2024-12-15 11:03:57,427 -INFO - 127.0.0.1 - - [15/Dec/2024 11:03:57] "POST /predict HTTP/1.1" 200 -
+2024-12-15 12:15:57,299 -INFO - [33mPress CTRL+C to quit[0m
+2024-12-15 12:16:02,497 -INFO - 127.0.0.1 - - [15/Dec/2024 12:16:02] "GET / HTTP/1.1" 200 -
+2024-12-15 12:16:05,073 -INFO - 127.0.0.1 - - [15/Dec/2024 12:16:05] "GET /predict HTTP/1.1" 200 -
+2024-12-15 12:23:09,915 -INFO - Parameters: 102896975 C749981943 C667346055 50 2024-11-03 CASH_OUT 416002 0 416002            Result: 1
+2024-12-15 12:23:09,916 -INFO - 127.0.0.1 - - [15/Dec/2024 12:23:09] "POST /predict HTTP/1.1" 200 -
