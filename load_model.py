@@ -9,7 +9,7 @@ def predict(ipaddr, uacc, dacc, age, tdate, payment_type, oldbalance, newbalance
     model = mod['model']
     encoder = mod['encoder']
     payment = mod['payment']
-    tdate = pd.to_datetime(tdate, format='%m/%d/%Y', errors='coerce')
+    tdate = pd.to_datetime(tdate, format='%Y-%m-%d', errors='coerce')
 
     day = tdate.day
     month = tdate.month
@@ -21,18 +21,15 @@ def predict(ipaddr, uacc, dacc, age, tdate, payment_type, oldbalance, newbalance
     month_cos = np.cos((month - 1) * (2. * np.pi / 12))
 
     input_data = pd.DataFrame([[uacc, dacc]], columns=['UserAccount', 'DestinationAccount'])
-    
-    # Apply transformation using the encoder
     transformed = encoder.transform(input_data)
-    
-    # Extract the transformed values
-    uacc = transformed.iloc[0, 0]  # Encoded UserAccount
+    uacc = transformed.iloc[0, 0]
     dacc = transformed.iloc[0, 1]
-    #dacc = encoder.transform([dacc])
+    
     payment_type = payment[payment_type]
 
     X = np.array([ipaddr, uacc, dacc, age, payment_type, withdraw, oldbalance, newbalance,\
                             0.0, 0.0, day, month, year, day_sin, day_cos, month_sin, month_cos])
+    print(X)
     res = model.predict(X.reshape(1, -1))[0]
     return res
 

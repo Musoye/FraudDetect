@@ -4,6 +4,10 @@ import logging
 
 app = Flask(__name__)
 
+#Remove all the handler
+for handler in app.logger.handlers:
+    app.logger.removeHandler(handler)
+
 logging.basicConfig(
     filename='app.log',
     level=logging.INFO,
@@ -23,7 +27,7 @@ def get_predict():
 def post_predict():
     if request.method == 'POST':
         dat = request.form
-        ipaddr = dat['ipaddr'].replace('.', '')
+        ipaddr = int(dat['ipaddr'].replace('.', ''))
         uacc = dat['uacc']
         dacc = dat['dacc']
         age = dat['age']
@@ -32,34 +36,34 @@ def post_predict():
         oldbalance = dat['obalance']
         newbalance = dat['nbalance']
         withdraw = dat['withdraw']
-        print(withdraw)
-        ans = predict(ipaddr, uacc, dacc, age, tdate, payment_type, oldbalance, newbalance, withdraw)
+        #print(ipaddr, uacc, dacc, age, tdate, payment_type, oldbalance, newbalance, withdraw)
+        ans = int(predict(ipaddr, uacc, dacc, age, tdate, payment_type, oldbalance, newbalance, withdraw))
         print(ans)
-        message_format = F'{ipaddr} {uacc} {dacc} {age} {tdate} {payment_type} {oldbalance} {newbalance}\
-            {withdraw} {ans}'
-        app.logger.info(message_format)
+        message_format = F'Parameters: {ipaddr} {uacc} {dacc} {age} {tdate} {payment_type} {oldbalance} {newbalance} {withdraw}\
+            Result: {ans}'
+        logging.info(message_format)
         return jsonify({'isFraud': ans})
 
 @app.route('/api/predict', methods=['POST'])
 def post_api_predict():
     if request.method == 'POST':
         dat = request.get_json()
-        ipaddr = dat['ipaddr'].replace('.', '')
+        ipaddr = int(dat['ipaddr'].replace('.', ''))
         uacc = dat['uacc']
         dacc = dat['uacc']
         age = dat['age']
-        tdate = dat['tdate']
+        tdate = str(dat['tdate'])
         payment_type = dat['payment_type']
         oldbalance = dat['obalance']
         newbalance = dat['nbalance']
         withdraw = dat['withdraw']
-        ans = predict(ipaddr, uacc, dacc, age, tdate, payment_type, oldbalance, newbalance, withdraw)
-        print(ans)
-        message_format = F'{ipaddr} {uacc} {dacc} {age} {tdate} {payment_type} {oldbalance} {newbalance}\
-            {withdraw} {ans}'
-        app.logger.info(message_format)
-    return jsonify({'isFraud': ans})
+        ans = int(predict(ipaddr, uacc, dacc, age, tdate, payment_type, oldbalance, newbalance, withdraw))
+        #print(ans)
+        message_format = F'Parameters: {ipaddr} {uacc} {dacc} {age} {tdate} {payment_type} {oldbalance} {newbalance} {withdraw}\
+            Result: {ans}'
+        logging.info(message_format)
+        return jsonify({'isFraud': ans})
     
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
